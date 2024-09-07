@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> <%= username %>'s Todo List </title>
+    <link rel="stylesheet" href="/css/base.css">
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Todo</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if(todos.length === 0) { %>
+                <tr>No todos found</tr>
+            <% } else { %>
+            <% todos.forEach(todo => { %>
+                <% if(!todo) return %>
+                <tr>
+                    <td><%= todo %></td>
+                    <td>
+                        <form class="hidden-form" action="/delete-todo" method="post">
+                            <input type="hidden" name="username" value="<%= username %>">
+                            <input type="hidden" name="todoToDelete" value="<%= todo %>">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) }%>
+        </tbody>
+    </table>
+    <a href="/">Back</a>
+</body>
+
+</html>
